@@ -26,7 +26,7 @@ Privilege escalation can be divided in two types: vertical and horizontal.
 
 
 - Enumeration 
-  - System and User Enum
+ 	 - System and User Enum
 	- Files Enum
 	- Network Enum
 	- Password Enum
