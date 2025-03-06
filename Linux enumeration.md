@@ -85,3 +85,138 @@ Files with SUID/SGID Bit:
 ```shell
 find / -perm /6000 -type f 2>/dev/null
 ```
+
+## Files Enumeration
+
+**File enumeration involves searching for sensitive files, misconfigurations, or improper permissions that can be exploited to escalate privileges or gain unauthorized access.**
+
+Search for World-Writable Files:
+```shell
+find / -type f -perm -o+w 2>/dev/null
+```
+
+Search for World-Writable Directories:
+```shell
+find / -type d -perm -o+w 2>/dev/null
+```
+
+Search for Files Owned by Root:
+```shell
+find / -uid 0 -type f 2>/dev/null
+```
+
+Search for Files with SUID Bit:
+```shell
+find / -perm /4000 -type f 2>/dev/null
+```
+
+Search for Files with SGID Bit:
+```shell
+find / -perm /2000 -type f 2>/dev/null
+```
+
+Search for Configuration Files Containing Credentials:
+```shell
+grep -Ri "password" /etc/* 2>/dev/null
+grep -Ri "passwd" /home/* 2>/dev/null
+```
+
+Identify Writable Files in System Directories:
+```shell
+find /etc -writable 2>/dev/null
+```
+
+Look for Backup Files:
+```shell
+find / -name "*.bak" -o -name "*.backup" 2>/dev/null
+```
+
+Search for SSH Keys:
+```shell
+find / -name "id_rsa" -o -name "id_dsa" 2>/dev/null
+```
+
+Search for Sensitive Application Configuration Files;
+**Apache:**
+```shell
+cat /etc/httpd/conf/httpd.conf
+```
+
+**MySQL:**
+```shell
+cat /etc/mysql/my.cnf
+```
+
+Find Recent Files Modified or Created:
+```shell
+find / -type f -mtime -5 2>/dev/null
+```
+
+Find Hidden Files:
+```shell
+find / -name ".*" 2>/dev/null
+```
+
+Identify Files Owned by Current User:
+```shell
+find / -user $(whoami) 2>/dev/null
+```
+
+Check for Backup/Temp Files in Home Directories:
+```shell
+ls -laR /home/ | grep "~"
+```
+
+## Network Enumeration
+
+**Network enumeration involves discovering network configurations, active connections, and accessible services to identify potential attack vectors for privilege escalation or lateral movement.**
+
+Show Network Interfaces:
+```shell
+ip a
+ifconfig
+```
+
+Routing Table:
+```shell
+ip route
+route -n
+```
+
+View Active Network Connections:
+```shell
+netstat -tuln
+ss -tuln
+```
+
+DNS Configuration:
+```shell
+cat /etc/resolv.conf
+```
+
+ARP Table:
+```shell
+arp -a
+ip neigh
+```
+
+Ping to Test Connectivity:
+```shell
+ping -c 4 <target-ip>
+```
+
+Traceroute to Map Network Path:
+```shell
+traceroute <target-ip>
+```
+
+Identify Listening Ports:
+```shell
+netstat -tulnp
+lsof -i
+```
+
+Scan Open Ports on Target:
+```shell
+nmap -sS -p- <target-ip>
+```
