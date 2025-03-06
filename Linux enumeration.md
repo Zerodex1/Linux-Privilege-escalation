@@ -46,7 +46,6 @@ Current User and Group:
 Logged-in Users:
 
 ```shell
- w
  last
 ```
 
